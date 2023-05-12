@@ -23,11 +23,13 @@ def frequency_of_words(url):
         else:
             word_counts[word] = 1
 
-    # Format the output as a JSON list of words and their frequencies
-    output = [{'word': word, 'count': count} for word, count in word_counts.items()]
+    # Format the output as a dictionary of words and their frequencies
+    output = {}
+    for word, count in word_counts.items():
+        output[word] = count
 
-    # Sort the list by frequency (descending) and then alphabetically (ascending)
-    output.sort(key=lambda x: (-x['count'], x['word']))
+    # Sort the dictionary by frequency (descending) and then alphabetically (ascending)
+    output = dict(sorted(output.items(), key=lambda x: (-x[1], x[0])))
 
     return json.dumps(output)
 
